@@ -1,3 +1,10 @@
+# -*- coding: UTF-8 -*-
+
+'''
+MixCryptor 1.1
+You can use, study the code, modify and share modified copies of this program, according to the GNU GPL v3
+'''
+
 import re
 import os
 import sys
@@ -7,12 +14,34 @@ init(autoreset=True)
 
 ######################################################Settings#########################################################################################################
 
-config = open("config.txt","r")
-readed = config.read()
-idioma = int(re.sub("lang=","",readed))
-config.close()
+try:
+    config = open("config.txt","r")
+    readed = config.read()
+    idioma = int(re.sub("lang=","",readed))
+    config.close()
+except FileNotFoundError:
+    print(Fore.YELLOW+Style.BRIGHT+"Recuperation Mode (ERROR: the file \"config.txt\" cant be founded (1))")
+    print("Creating config.txt...")
+    config = open("config.txt","w")
+    print("Writing config.txt...")
+    config.write("lang=0")
+    config.close()
+    print("The program will close.")
+    input()
+    sys.exit()
+except ValueError:
+    print(Fore.YELLOW+Style.BRIGHT+"Recuperation Mode (ERROR: invalid value (2))")
+    print("Opening config.txt...")
+    config = open("config.txt","w")
+    print("Repairing config.txt...")
+    config.write("lang=0")
+    config.close()
+    print("The program will close.")
+    input()
+    sys.exit()
+    
 
-######################################################Idiomas#########################################################################################################
+abc = "!\"#$%&'()*+, \n\t-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿŒœŠšŸŽžƒˆ˜"
 '''
 Idioma 0: ingles
 Idioma 1: español
@@ -20,7 +49,7 @@ Idioma 1: español
 
 mcencrypt = [Fore.YELLOW+Style.BRIGHT+"MixCryptor -- Encrypt",Fore.YELLOW+Style.BRIGHT+"MixCryptor -- Encriptar"]
 ptftbe = [Fore.CYAN+Style.BRIGHT+"Put the directory of the file to be encrypted:",Fore.CYAN+Style.BRIGHT+"Escribe el directorio del archivo a encriptar:"]
-fnferror = [Fore.RED+Style.BRIGHT+"ERROR: the file cant be founded",Fore.RED+Style.BRIGHT+"ERROR: el archivo no pudo ser encontrado"]
+fnferror = [Fore.RED+Style.BRIGHT+"ERROR: the file cant be founded (1)",Fore.RED+Style.BRIGHT+"ERROR: el archivo no pudo ser encontrado (1)"]
 ptkd = ["Puts the key directory\nmix>","Escribe el directorio del archivo de claves\nmix>"]
 encrypting = ["Encrypting...","Encriptando..."]
 ptdtbs = ["Put the directory to save the encrypted file:\nmix>","Escribe el directorio a guardar el archivo encriptado:\nmix>"]
@@ -50,6 +79,29 @@ mccredits = [Fore.WHITE+Style.BRIGHT+'''CREDITS:
 
 easterspam = [Fore.BLUE+Style.BRIGHT+"Easter Spam, "+Fore.YELLOW+"and Easter eggs... "+Fore.WHITE+"Meh, a very bad joke :v",Fore.BLUE+Style.BRIGHT+"Easter Spam, "+Fore.YELLOW+"y Easter eggs... "+Fore.WHITE+"Ñah, un chiste muy malo :v"]
 helped = ["\nPut \"help\" or \"list\" to show a list of commands.","\nEscribe \"help\" o \"list\" para ver una lista de comandos."]
+
+InvalidError = [Fore.RED+Style.BRIGHT+"ERROR: invalid value (2)",Fore.RED+Style.BRIGHT+"ERROR: valor invalido (2)"]
+wtderror = [Fore.RED+Style.BRIGHT+"ERROR: Insufficient quantity or variety of characters (3)",Fore.RED+Style.BRIGHT+"ERROR: Cantidad o variedad insuficiente de caracteres (3)"]
+cuantosCaracteres = ["How many characters do you want? ","Cuantos caracteres quieres? "]
+formatkey = [
+    '''Choose the format of the keys:
+1: Numbers from 0 to 9
+2: Lowercase letters
+3: Uppercase letters
+4: Uppercase and lowercase letters
+5: Random characters
+6: Custom characters
+mix>''','''Elige el formato de las claves:
+1: Numeros del 0 al 9
+2: Letras minusculas
+3: Letras mayusculas
+4: Letras mayusculas y minusculas
+5: Caracteres aleatorios
+6: Caracteres personalizados
+mix>'''
+    ]
+clserror = [Fore.RED+Style.BRIGHT+"ERROR: Cant clear the screen (4)",Fore.RED+Style.BRIGHT+"Error: No se pudo limpiar la pantalla (4)"]
+InexistentCommand = ["ERROR: Inexistent command (6)","ERROR: Comando inexistente (6)"]
 ######################################################Funciones########################################################################################################
 
 #funcion para limpiar la pantalla
@@ -69,6 +121,7 @@ def clearScreen():
 
 #funcion de encriptacion
 def encrypt():
+    global abc
     print(mcencrypt[idioma])
     #Pide la ruta del archivo a encriptar
     print(ptftbe[idioma])
@@ -76,7 +129,6 @@ def encrypt():
     plaintext = ""
     ruta = str(input("mix>"))
     #inicializa un array con el abecedario
-    abc = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9"," ","\n",".",",","A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z","!","?","¡","¿","\"","-","_","<",">",":","(",")","{","}","[","]","\\","/","#","$","%","&","+","*"]
     #inicializa un array vacio para las claves
     key = []
 
@@ -186,7 +238,7 @@ def decrypt():
 
     #setup
     #Inicializa el array del abc
-    abc = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9"," ","\n",".",",","A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z","!","?","¡","¿","\"","-","_","<",">",":","(",")","{","}","[","]","\\","/","#","$","%","&","+","*"]
+    global abc
     #Array vacio para cargar las claves
     key = []
     #entrada
@@ -291,10 +343,39 @@ def decrypt():
 #-----------------------------------------------------KEY GENERATOR----------------------------------------------------------------------------------------------------
 def keyGenerate():
 
-    #Inicializa el array del abc
-    abc = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9"," ","\n",".",",","A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z","!","?","¡","¿","\"","-","_","<",">",":","(",")","{","}","[","]","\\","/","#","$","%","&","+","*"]
+    #GLobalizar el array del abc
+    global abc
     #En este array se guardaran los numeros aleatorios generados en formato string
     key = []
+
+    def randomNums():
+        arr = []
+        cantidad = int(input(cuantosCaracteres[idioma]+ "(<"+str(len(abc))+")\nmix>"))
+        while len(arr) < 50:
+            toput = abc[random.randint(0,len(abc)-1)]
+            j=0
+            continuar = False
+            if toput == "\n":
+                continue
+            while j < len(arr)-1:
+                if toput == arr[j]:
+                    continuar = True
+                j+=1
+            if continuar:
+                continue
+            arr.append(toput)
+        return arr
+
+    def azminNums():
+        return "abcdefghijklmnñopqrstuvwxyz"
+    def azmayNums():
+        return "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+    def azmixNums():
+        return "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz"
+    def numsNums():
+        return "0123456789"
+    def customNums():
+        return input("Input the characters you want\nmix>")
 
     #String de numeros para elegir aleatoriamente
     nums = ["0","1","2","3","4","5","6","7","8","9"]
@@ -303,16 +384,36 @@ def keyGenerate():
     ruta = input(ptdtstkf[idioma])
     #Pide la longitud de cada clave
     leng = int(input(ptlotk[idioma]))
-    print(generatingkeys[idioma])
 
+    carand = input(formatkey[idioma])
+    if carand == "1":
+        nums = numsNums()
+    elif carand == "2":
+        nums = azminNums()
+    elif carand == "3":
+        nums = azmayNums()
+    elif carand == "4":
+        nums = azmixNums()
+    elif carand == "5":
+        nums = randomNums()
+    elif carand == "6":
+        nums = customNums()
+    else:
+        print(InvalidError)
+        input()
+        return
+    print(generatingkeys[idioma])
+    
     key.append(str(leng))
+
+    wtd = 300
     #Loop hasta que se acabe el abc
     while len(key) < len(abc):
         #Genera una secuencia aleatoria
         ii = 0
         keytoput = ""
         while ii < leng:
-            ntoput = str(nums[random.randint(0,9)])
+            ntoput = str(nums[random.randint(0,len(nums)-1)])
             keytoput+=ntoput
             ii+=1
         k = 0
@@ -321,12 +422,18 @@ def keyGenerate():
         while k < len(key):
             if keytoput == key[k]:
                 saltar = True
+                wtd -=1
+            if wtd < 1:
+                print (wtderror[idioma])
+                input()
+                return
             k+=1
         #Si es asi va al siguiente loop
         if saltar == True:
             continue
         #Si no le agrega el valor al array key
         key.append(keytoput)
+        wtd = 300
 
     print("Saving key...")
     #Guarda el archivo de claves en la ruta dicha anteriormente
@@ -343,19 +450,19 @@ def keyGenerate():
 def setLanguage():
     global idioma
     if idioma == 0:
-        print("Put the number of the language:\n0: English\n1: Spanish")
+        print("Put the number of the language:\n0: English\n1: Español")
     if idioma == 1:
-        print("Escribe el numero del lenguaje:\n0: Ingles\n1: Español")
+        print("Escribe el numero del lenguaje:\n0: English\n1: Español")
 
     try:
         num = int(input("mix>"))
     except:
         if idioma == 0:
-            print(Fore.RED+Style.BRIGHT+"ERROR: what? You put any character what is not a number >:(")
+            print(Fore.RED+Style.BRIGHT+"ERROR: what? You put any character what is not a number >:( (5)")
             input()
             return
         if idioma == 1:
-            print(Fore.RED+Style.BRIGHT+"ERROR: KHE? Metiste algo que no es un numero >:(")
+            print(Fore.RED+Style.BRIGHT+"ERROR: KHE? Metiste algo que no es un numero >:( (5)")
             input()
             return
     configfile = open("config.txt","w")
@@ -371,16 +478,16 @@ def setLanguage():
         configfile.write("lang="+str(idioma))
         configfile.close()
         if idioma == 0:
-            print("ERROR: invalid number")
+            print(InvalidError[idioma])
         if idioma == 1:
-            print("ERROR: numero invalido")
+            print(InvalidError[idioma])
         input()
         return
 
     configfile.close()
     idioma = num
 ######################################################Programa principal###############################################################################################
-print(Fore.WHITE+Back.BLUE+Style.BRIGHT+"MixCryptor v1.0 | by @URROVA                                                    "+Fore.CYAN+Style.BRIGHT+helped[idioma])
+print(Fore.WHITE+Back.BLUE+Style.BRIGHT+"MixCryptor v1.1 | by @URROVA                                                    "+Fore.CYAN+Style.BRIGHT+helped[idioma])
 
 #Hace un loop infinito
 while True:
@@ -451,5 +558,5 @@ while True:
         print(easterspam[idioma])
     #Si no es ninguna, marca un error
     else:
-        print(Fore.RED+Style.BRIGHT+"ERROR: inexistent command.")
+        print(Fore.RED+Style.BRIGHT+InexistentCommand[idioma])
         

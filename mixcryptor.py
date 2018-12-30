@@ -600,15 +600,8 @@ def makeLanguageWindow():
 #-------------------------------------------PopUps--------------------------------------------------------------LOLXDWTF-----------------------------------------------
 
 def showmethecredits():
-    tkmb.showinfo("Credits",'''
-Credits:
-    Programming and Cipher design: @URROVA (Ulises Z.)
-    Programmed in python (Easter spam and easter eggs...)
-    GUI designed in Tkinter
-
-Visit my webpage to view more projects!
-https://urrova.github.io/
-''')
+    msg = msgs[25][idioma].replace("\\n","\n")
+    tkmb.showinfo("MixCryptor",msg)
 
 def showmethehelp():
     tkmb.showinfo("Help",'''

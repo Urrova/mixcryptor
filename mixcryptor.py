@@ -604,17 +604,8 @@ def showmethecredits():
     tkmb.showinfo("MixCryptor",msg)
 
 def showmethehelp():
-    tkmb.showinfo("Help",'''
-Help:
-
-
-Encrypt: Here you put the root of the file to encrypt and the key file, and the root for save the encrypted file.
-
-Decrypt: Here you put the root of the file to decrypt and the key file, and the root for save the decrypted file.
-
-Generate Key: Here you make the key to encrypt/decrypt. You put the root to save the key file, the size of the keys, the format and the characters quantity.
-
-''')
+    msg = msgs[26+idioma][0].replace("\\n","\n")
+    tkmb.showinfo("MixCryptor",msg)
 
 ######################################################Programa principal###############################################################################################
 

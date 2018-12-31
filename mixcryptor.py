@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 '''
-MixCryptor 1.1
+MixCryptor 1.2
 You can use, study the code, modify and share modified copies of this program, according to the GNU GPL v3
 '''
 

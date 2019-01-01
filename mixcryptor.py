@@ -16,18 +16,18 @@ import tkinter.messagebox as tkmb
 ######################################################Settings#########################################################################################################
 
 try:
-    config = open("config.txt","r")
+    config = open("files/config/config.txt","r")
     readed = config.read()
     idioma = int(readed.replace("lang=",""))
     config.close()
 except FileNotFoundError:
-    config = open("config.txt","w")
+    config = open("files/config/config.txt","w")
     config.write("lang=0")
     config.close()
     tkmb.showwarning("Recuperation Mode","The file \"config.txt\" was inexistent, and MixCryptor created it with lang = 0. MixCryptor will close.")
     sys.exit()
 except ValueError:
-    config = open("config.txt","w")
+    config = open("files/config/config.txt","w")
     config.write("lang=0")
     config.close()
     tkmb.showwarning("Recuperation Mode","The file \"config.txt\" was corrupted, and MixCryptor fixed it with lang = 0. MixCryptor will close.")
@@ -40,18 +40,31 @@ Idioma 0: ingles
 Idioma 1: español
 '''
 
-language_file=open("languages.txt","r")
+language_file=open("files/lang/languages.txt","r")
 lf_content = language_file.read()
 language_file.close()
 
 msgs = lf_content.split("\n")
-
 
 c = 0
 
 for i in msgs:
     msgs[c]=i.split(",")
     c+=1
+
+msgs[0][0] = re.sub(r"ï.¿","",msgs[0][0])
+
+help_file = open("files/lang/help.txt")
+hf_content = help_file.read()
+help_file.close()
+
+helpmsg = hf_content.split("\n")
+
+cred_file = open("files/lang/credits.txt")
+cf_content = cred_file.read()
+cred_file.close()
+
+credmsg = cf_content.split("\n")
 
 ######################################################Funciones########################################################################################################
 
@@ -93,7 +106,7 @@ def encrypt(root, keyRoot, save):
         f = open(root, "r")
     #si no existe retorna
     except FileNotFoundError:
-        tkmb.showerror("MixCryptor",msgs[18][idioma])
+        tkmb.showerror("MixCryptor",msgs[18][idioma].replace("%",root))
         return
 
 
@@ -111,7 +124,7 @@ def encrypt(root, keyRoot, save):
         keyfile = open(keyRoot,"r")
     #Si no existe retorna
     except FileNotFoundError:
-        tkmb.showerror("MixCryptor",msgs[19][idioma])
+        tkmb.showerror("MixCryptor",msgs[18][idioma].replace("%",keyRoot))
         return
 
     #Va poniendo cada una de las claves
@@ -174,7 +187,7 @@ def encrypt(root, keyRoot, save):
     savefile = open(save,"w")
     savefile.write(ciphertext)
     savefile.close()
-    tkmb.showinfo("MixCryptor",msgs[20][idioma])
+    tkmb.showinfo("MixCryptor",msgs[19][idioma])
 
 
 
@@ -193,7 +206,7 @@ def decrypt(ruta, keyRoot, saveRoot):
         cipherfile = open(ruta,"r")
     #Si no existe retorna
     except FileNotFoundError:
-        tkmb.showerror("MixCryptor",msgs[18][idioma])
+        tkmb.showerror("MixCryptor",msgs[18][idioma].replace("%",root))
         return
     #Lee el archivo cifrado
     ciphertext = cipherfile.read()
@@ -207,7 +220,7 @@ def decrypt(ruta, keyRoot, saveRoot):
         keyfile = open(keyRoot,"r")
     #Si no existe retorna
     except FileNotFoundError:
-        tkmb.showerror("MixCryptor",msgs[19][idioma])
+        tkmb.showerror("MixCryptor",msgs[18][idioma].replace("%",keyRoot))
         return
 
     #Va poniendo cada una de las claves
@@ -272,7 +285,7 @@ def decrypt(ruta, keyRoot, saveRoot):
     savefile.close()
     clearScreen()
     #Dice que lo desencripto con exito y espera
-    tkmb.showinfo("MixCryptor",msgs[21][idioma])
+    tkmb.showinfo("MixCryptor",msgs[20][idioma])
 
 #-----------------------------------------------------KEY GENERATOR----------------------------------------------------------------------------------------------------
 def keyGenerate(saveRoot, lenght, formato):
@@ -363,7 +376,7 @@ def keyGenerate(saveRoot, lenght, formato):
         keyfile.write(val+"\n")
     keyfile.close()
 
-    tkmb.showinfo("MixCryptor",msgs[22][idioma])
+    tkmb.showinfo("MixCryptor",msgs[21][idioma])
 
 #----------------------------------------------------SET LANUAGE-------------------------------------------------------------------------------------------------------
 def setLanguage(num):
@@ -372,12 +385,9 @@ def setLanguage(num):
     
     configfile = open("config.txt","w")
 
-    if num == 0  or num == 1 or num == 2:
-        configfile.write("lang="+str(num))
-        if idioma == 0:
-            tkmb.showinfo("MixCryptor",msgs[23][idioma])
-        if idioma == 1 or idioma == 2:
-            tkmb.showinfo("MixCryptor",msgs[23][idioma])
+    configfile.write("lang="+str(num))
+
+    tkmb.showinfo("MixCryptor",msgs[22][idioma])
 
     configfile.close()
     idioma = num
@@ -564,6 +574,7 @@ def makeLanguageWindow():
         ("English",0),
         ("Español",1),
         ("Portugues",2),
+        ("Italiano",3)
     ]
 
     clearWindow()
@@ -577,7 +588,7 @@ def makeLanguageWindow():
     Frame(root, width=250, height=3, relief=SUNKEN).pack()
     Frame(root, width=250, height=10).pack()
 
-    Label(root, text=msgs[24][idioma],anchor="center").pack()
+    Label(root, text=msgs[23][idioma],anchor="center").pack()
 
     for val, language in enumerate(languages):
         
@@ -600,11 +611,11 @@ def makeLanguageWindow():
 #-------------------------------------------PopUps--------------------------------------------------------------LOLXDWTF-----------------------------------------------
 
 def showmethecredits():
-    msg = msgs[25][idioma].replace("\\n","\n")
+    msg = credmsg[idioma].replace("\\n","\n")
     tkmb.showinfo("MixCryptor",msg)
 
 def showmethehelp():
-    msg = msgs[26+idioma][0].replace("\\n","\n")
+    msg = helpmsg[idioma].replace("\\n","\n")
     tkmb.showinfo("MixCryptor",msg)
 
 ######################################################Programa principal###############################################################################################

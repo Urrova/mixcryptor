@@ -1,0 +1,24 @@
+﻿Encrypt,Encriptar,Criptografar,Crittografare
+Decrypt,Desencriptar,Descriptografar,Decifrare
+Generate Key,Generar Clave,Gerar chave,Genera chiave
+Change language,Cambiar lenguage,Alterar idioma,Cambia lingua
+Help,Ayuda,Ajuda,Aiutare
+Credits,Creditos,Creditos,Crediti
+Root of the file to encrypt,Ruta del archivo a encriptar,Raiz do arquivo para criptografar,Percorso del file da crittografare
+Root of the key file,Ruta del archivo de claves,Raiz do arquivo de chaves,Percorso del file chiave
+Root for save the file,Ruta para guardar el archivo,Raiz para salvar o arquivo,Percorso per salvare il file
+Back,Volver,De volta,Ritorno
+Root of the file to decrypt,Ruta del archivo a desencriptar,Raiz do arquivo para criptografar,Percorso del file da decrittografare
+Lenght of the keys,Largo de las claves,Comprimento das chaves,Lunghezza delle chiavi
+Format of the keys,Formato de las claves,Formato das chaves,Formato delle chiavi
+Numbers from 0 to 9,Numeros del 0 al 9,Numeros de 0 a 9,Numeri da 0 a 9
+Lowercase letters,Letras minusculas,Letras peqeunas,Lettere minuscole
+Uppercase letters,Letras mayusculas,Letras maiusculas,Lettere maiuscole
+Uppercase and lowercase letters,Letras mayusculas y minusculas,Letras maiusculas e letras pequenas,Lettere maiuscole e minuscole
+Random characters,Caracteres aleatorios,Caracteres aleatorios,Simboli casuali
+The file "%" has not been found,El archivo "%" no se pudo encontrar,O arquivo "%" nao foi encontrado,Il file "%" non e stato trovato
+The file has been encrypted sucesfully!,El archivo fue encriptado exitosamente!,Oi arquivo foi criptografado com sucesso!,Il file e stato crittografato con successo!
+The file has been dencrypted sucesfully!,El archivo fue desencriptado exitosamente!,Oi arquivo foi descriptografado com sucesso!,Il file e stato decodificato correttamente!
+The key file has been generated and saved sucessfully!,El archivo de claves fue generado y guardado exitosamente!,O arquivo de chave foi gerado e salvo com sucesso!,Il file chiave e stato generato e salvato con successo!
+The language has been changed sucessfully!,El lenguage fue cambiado exitosamente!,A linguagem foi alterada com sucesso!,La lingua e stata cambiata con successo!
+Choose the language to change,Elige el lenguage a cambiar,Escolha o idioma para mudar,Scegli la lingua da cambiare

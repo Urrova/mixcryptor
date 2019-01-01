@@ -1,0 +1,15 @@
+#---Compilados---#
+##################
+.exe
+.pyc
+.spec
+
+#--Pyinstaller---#
+##################
+__pycache__
+build
+dist
+
+#--Comprimidos--#
+.zip
+.rar

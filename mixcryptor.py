@@ -314,11 +314,11 @@ def keyGenerate(saveRoot, lenght, formato):
         return arr
 
     def azminNums():
-        return "abcdefghijklmnñopqrstuvwxyz"
+        return "abcdefghijklmnopqrstuvwxyz"
     def azmayNums():
-        return "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+        return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     def azmixNums():
-        return "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz"
+        return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
     def numsNums():
         return "0123456789"
 
@@ -486,9 +486,16 @@ def makeKeyWindow():
         (msgs[13][idioma],1),
         (msgs[14][idioma],2),
         (msgs[15][idioma],3),
-        (msgs[16][idioma],4),
-        (msgs[17][idioma],5)
+        (msgs[16][idioma],4)
+        #Random characters option here
+        
+        
     ]
+
+    ''',
+        (msgs[17][idioma],5)
+    '''
+    #Esto se queda comentado hasta que arregle o arreglen el error de PyInstaller.
     
     Label(root, text=msgs[2][idioma],anchor="center", font=("Helvetica",25)).pack()
 

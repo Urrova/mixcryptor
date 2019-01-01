@@ -1,8 +1,8 @@
 #---Compilados---#
 ##################
-.exe
-.pyc
-.spec
+*.exe
+*.pyc
+*.spec
 
 #--Pyinstaller---#
 ##################
@@ -11,5 +11,5 @@ build
 dist
 
 #--Comprimidos--#
-.zip
-.rar
+*.zip
+*.rar

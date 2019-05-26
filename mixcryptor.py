@@ -383,7 +383,7 @@ def setLanguage(num):
     
     global idioma
     
-    configfile = open("config.txt","w")
+    configfile = open("files/config/config.txt","w")
 
     configfile.write("lang="+str(num))
 

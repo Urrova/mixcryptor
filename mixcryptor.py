@@ -8,7 +8,8 @@ You can use, study the code, modify and share modified copies of this program, a
 import re
 import os
 import sys
-import random
+import secrets
+import string
 from tkinter import *
 from tkinter.ttk import *
 import tkinter.messagebox as tkmb
@@ -299,7 +300,7 @@ def keyGenerate(saveRoot, lenght, formato):
         arr = []
         
         while len(arr) < 50:
-            toput = abc[random.randint(0,len(abc)-1)]
+            toput = abc[secrets.randbelow(len(abc)-1)]
             j=0
             continuar = False
             if toput == "\n":
@@ -314,13 +315,15 @@ def keyGenerate(saveRoot, lenght, formato):
         return arr
 
     def azminNums():
-        return "abcdefghijklmnopqrstuvwxyz"
+        return string.ascii_lowercase
     def azmayNums():
-        return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        return string.ascii_uppercase
     def azmixNums():
-        return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+        return string.ascii_letters
     def numsNums():
-        return "0123456789"
+        return string.digits
+    def hexNums():
+        return string.hexdigits
 
     #String de numeros para elegir aleatoriamente
     nums = ["0","1","2","3","4","5","6","7","8","9"]
@@ -349,7 +352,7 @@ def keyGenerate(saveRoot, lenght, formato):
         ii = 0
         keytoput = ""
         while ii < leng:
-            ntoput = str(nums[random.randint(0,len(nums)-1)])
+            ntoput = str(nums[secrets.randbelow(len(nums)-1)])
             keytoput+=ntoput
             ii+=1
         k = 0
@@ -598,8 +601,6 @@ def makeLanguageWindow():
     Label(root, text=msgs[23][idioma],anchor="center").pack()
 
     for val, language in enumerate(languages):
-        
-        
         Radiobutton(root, 
                   text=language[0],
                   variable=v, 
